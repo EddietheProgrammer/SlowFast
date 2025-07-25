@@ -1,0 +1,30 @@
+[project]
+name = "slowfast"
+version = "0.1.0"
+description = "Forked SlowFast with custom implementations"
+authors = [
+    {name = "EddietheProgrammer",email = "124279660+EddietheProgrammer@users.noreply.github.com"}
+]
+license = {text = "Apache"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "torch (>=2.7.1,<3.0.0)",
+    "pytorchvideo @ git+https://github.com/facebookresearch/pytorchvideo.git",
+    "fvcore @ git+https://github.com/facebookresearch/fvcore",
+    "simplejson (>=3.20.1,<4.0.0)",
+    "iopath (>=0.1.10,<0.2.0)",
+    "psutil (>=7.0.0,<8.0.0)",
+    "opencv-python (>=4.12.0.88,<5.0.0.0)",
+    "tensorboard (>=2.20.0,<3.0.0)",
+    "scikit-learn (>=1.7.1,<2.0.0)",
+    "cython (>=3.1.2,<4.0.0)",
+    "torchvision (>=0.22.1,<0.23.0)",
+    "fairscale @ git+https://github.com/facebookresearch/fairscale",
+    "pandas (>=2.3.1,<3.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

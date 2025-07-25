@@ -1,63 +1,31 @@
 # Installation
 
 ## Requirements
-- Python >= 3.8
-- Numpy
-- PyTorch >= 1.3
-- [fvcore](https://github.com/facebookresearch/fvcore/): `pip install 'git+https://github.com/facebookresearch/fvcore'`
-- [torchvision](https://github.com/pytorch/vision/) that matches the PyTorch installation.
-  You can install them together at [pytorch.org](https://pytorch.org) to make sure of this.
-- simplejson: `pip install simplejson`
-- GCC >= 4.9
-- PyAV: `conda install av -c conda-forge`
-- ffmpeg (4.0 is prefereed, will be installed along with PyAV)
-- PyYaml: (will be installed along with fvcore)
-- tqdm: (will be installed along with fvcore)
-- iopath: `pip install -U iopath` or `conda install -c iopath iopath`
-- psutil: `pip install psutil`
-- OpenCV: `pip install opencv-python`
-- torchvision: `pip install torchvision` or `conda install torchvision -c pytorch`
-- tensorboard: `pip install tensorboard`
-- moviepy: (optional, for visualizing video on tensorboard) `conda install -c conda-forge moviepy` or `pip install moviepy`
-- PyTorchVideo: `pip install pytorchvideo`
-- [Detectron2](https://github.com/facebookresearch/detectron2):
-- FairScale: `pip install 'git+https://github.com/facebookresearch/fairscale'`
-```
-    pip install -U torch torchvision cython
-    pip install -U 'git+https://github.com/facebookresearch/fvcore.git' 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-    git clone https://github.com/facebookresearch/detectron2 detectron2_repo
-    pip install -e detectron2_repo
-    # You can find more details at https://github.com/facebookresearch/detectron2/blob/master/INSTALL.md
+Follow the installation in this order to make sure the package versions are compatible with each other.
+
+## Python Poetry
+- Python >= 3.10 
+- Poetry >= 2.0.0
+
+## Main Dependencies
+The main dependencies have been taken care for you with `poetry` (thanks Facebook) to make reproducability and installation easier. Here is how to set up your environment:
+```bash
+pip install poetry
+poetry config virtualenvs.in-project true
+poetry install
+source .venv/bin/activate
 ```
 
-## Pytorch
-Please follow PyTorch official instructions to install from source:
+## Extra
+For now, this repo possesses Facebook's `Detectron2` repo for object detection and tracking. This may be updated with more SOTA tools out there, but for now, this is what will be used. It requires and additional step:
+```bash
+git clone https://github.com/facebookresearch/detectron2 detectron2_repo
+poetry run pip install --no-build-isolation -e ./detectron2_repo
 ```
-git clone --recursive https://github.com/pytorch/pytorch
-```
+That should be it. 
 
-## PySlowFast
-
-Clone the PySlowFast Video Understanding repository.
-```
-git clone https://github.com/facebookresearch/slowfast
-```
-
-Add this repository to $PYTHONPATH.
-```
-export PYTHONPATH=/path/to/SlowFast/slowfast:$PYTHONPATH
-```
-
-### Build PySlowFast
-
-After having the above dependencies, run:
-```
-git clone https://github.com/facebookresearch/slowfast
-cd SlowFast
-python setup.py build develop
-```
 
 Now the installation is finished, run the pipeline with:
-```
+```bash
 python tools/run_net.py --cfg configs/Kinetics/C2D_8x8_R50.yaml NUM_GPUS 1 TRAIN.BATCH_SIZE 8 SOLVER.BASE_LR 0.0125 DATA.PATH_TO_DATA_DIR path_to_your_data_folder
 ```
